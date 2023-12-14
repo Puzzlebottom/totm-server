@@ -1,16 +1,15 @@
 module Mutations
   class DeleteEncounter < BaseMutation
-    field :id, Integer, null: true
+    field :id, Integer, null: false
 
     # arguments passed to the `resolve` method
     argument :id, Integer, required: true
 
-    def resolve(id: nil)
+    def resolve(id:)
       encounter = Encounter.find(id)
-      encounter.destroy
-      {
-        id:
-      }
+      raise GraphQL::ExecutionError, encounter.errors.full_messages.join(', ') unless encounter.destroy
+
+      { id: }
     end
   end
 end
