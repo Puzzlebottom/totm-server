@@ -14,7 +14,7 @@ module Mutations
         name:,
         description:,
         isActive: false,
-        owner: context[:current_user].id
+        user_id: context[:current_user].id
       )
     end
   end

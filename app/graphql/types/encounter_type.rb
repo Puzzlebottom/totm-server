@@ -6,7 +6,7 @@ module Types
     field :isActive, Boolean, null: false
     field :round, Integer, null: true
     field :turn, Integer, null: true
-    field :owner, Integer, null: true
+    field :user_id, Integer, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
   end
 end

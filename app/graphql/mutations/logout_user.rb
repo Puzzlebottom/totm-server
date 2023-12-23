@@ -6,7 +6,7 @@ module Mutations
 
     field :user, Types::UserType, null: false
 
-    def resolve(_args)
+    def resolve
       user = context[:current_user]
       if user.present?
         user.reset_authentication_token!

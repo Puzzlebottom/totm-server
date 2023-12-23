@@ -9,6 +9,8 @@ module Mutations
       authorize_user
 
       encounter = Encounter.find(attributes.id)
+      return if context[:current_user].id != encounter.user_id
+
       raise GraphQL::ExecutionError, encounter.errors.full_messages.join(', ') unless encounter.update(attributes.to_h)
 
       { encounter: }

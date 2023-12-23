@@ -3,7 +3,7 @@ module Types
     field :all_encounters, [EncounterType], null: false
 
     def all_encounters
-      Encounter.all
+      context[:current_user].encounters
     end
   end
 end

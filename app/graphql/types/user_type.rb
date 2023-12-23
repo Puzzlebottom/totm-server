@@ -5,6 +5,7 @@ module Types
     graphql_name 'User'
 
     implements GraphQL::Types::Relay::Node
+
     global_id_field :id
 
     field :email, String, null: false
