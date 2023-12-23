@@ -8,10 +8,8 @@ class GraphqlController < ApplicationController
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
-    context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
-    }
+    context = { current_user: }
+
     result = TotmServerSchema.execute(query, variables:, context:, operation_name:)
     render json: result
   rescue StandardError => e
@@ -40,6 +38,15 @@ class GraphqlController < ApplicationController
     else
       raise ArgumentError, "Unexpected parameter: #{variables_param}"
     end
+  end
+
+  def current_user
+    return nil if request.headers['Authorization'].blank?
+
+    token = request.headers['Authorization'].split(' ').last
+    return nil if token.blank?
+
+    User.find_for_database_authentication(authentication_token: token)
   end
 
   def handle_error_in_development(e)

@@ -54,3 +54,6 @@ group :development do
 end
 
 gem 'graphiql-rails', '1.7.0', group: :development
+
+gem 'devise', '~> 4.9'
+gem 'devise-token_authenticatable'

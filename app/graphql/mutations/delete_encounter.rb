@@ -6,6 +6,8 @@ module Mutations
     argument :id, Integer, required: true
 
     def resolve(id:)
+      authorize_user
+
       encounter = Encounter.find(id)
       raise GraphQL::ExecutionError, encounter.errors.full_messages.join(', ') unless encounter.destroy
 

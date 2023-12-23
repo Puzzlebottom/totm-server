@@ -8,10 +8,13 @@ module Mutations
     type Types::EncounterType
 
     def resolve(name: nil, description: nil)
+      authorize_user
+
       Encounter.create!(
         name:,
         description:,
-        isActive: false
+        isActive: false,
+        owner: context[:current_user].id
       )
     end
   end
